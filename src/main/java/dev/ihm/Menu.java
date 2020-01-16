@@ -11,6 +11,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+@Controller
+
 public class Menu {
 
     private Map<Integer, IOptionMenu> actions = new HashMap<>();
@@ -18,7 +23,7 @@ public class Menu {
     private String menu;
     private Scanner scanner;
 
-    public Menu(Scanner scanner, IPlatService service) {
+    public Menu(Scanner scanner, @Qualifier("platServiceVersion1") IPlatService service) {
         actions.put(1, new OptionListerPlats(service));
         actions.put(2, new OptionAjouterPlat(scanner, service));
         actions.put(99, new OptionTerminer());
